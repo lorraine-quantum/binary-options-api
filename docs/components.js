@@ -76,17 +76,7 @@ module.exports = {
           },
           password: {
             $ref: '#/components/password',
-          },
-          zipCode: {
-            $ref: '#/components/zipCode',
-          },
-          address: {
-            $ref: '#/components/address',
-          },
-          countryOfResidence: {
-            $ref: '#/components/countryOfResidence',
-          },
-
+          }
         },
       },
       // UserEdit: {
@@ -142,7 +132,7 @@ module.exports = {
           },
         },
       },
-      // Transaction: {
+      // deposit: {
       //   type: "object",
       //   properties: {
       //     amount: {

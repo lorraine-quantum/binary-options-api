@@ -55,7 +55,7 @@ const getSingleWithdrawal = async (req, res) => {
         }).populate({ path: "owner", model: "user" });
         if (!singleWithdrawal) {
             throw new NotFound(
-                `no transaction with id ${withdrawalId} for ${req.decoded.name}`
+                `no deposit with id ${withdrawalId} for ${req.decoded.name}`
             );
         }
         res.status(StatusCodes.OK).json(singleWithdrawal);
@@ -69,7 +69,7 @@ const getWithdrawals = async (req, res) => {
         const ownerId = req.decoded.id;
         const allWithdrawals = await Withdrawal.find({ owner: ownerId });
         if (allWithdrawals.length < 1) {
-            throw new NotFound("No transactions found for user");
+            throw new NotFound("No deposits found for user");
         }
         res
             .status(StatusCodes.OK)
@@ -90,7 +90,7 @@ const adminGetWithdrawals = async (req, res) => {
             // .limit(Number(req.query._end))
             // .skip(Number(req.query._start))
             if (allWithdrawals.length < 1) {
-                throw new NotFound("No transactions");
+                throw new NotFound("No deposits");
             }
             // res.set('Access-Control-Expose-Headers','X-Total-Count')
             // res.set('X-Total-Count',10)
@@ -107,7 +107,7 @@ const adminGetWithdrawals = async (req, res) => {
             // .limit(Number(req.query._end))
             // .skip(Number(req.query._start))
             if (allWithdrawals.length < 1) {
-                throw new NotFound("No transactions");
+                throw new NotFound("No deposits");
             }
             // res.set('Access-Control-Expose-Headers','Content-Range')
             // res.set('X-Total-Count',10)
@@ -123,7 +123,7 @@ const adminGetWithdrawals = async (req, res) => {
         // .limit(Number(req.query._end))
         // .skip(Number(req.query._start))
         if (allWithdrawals.length < 1) {
-            throw new NotFound("No transactions");
+            throw new NotFound("No deposits");
         }
         // console.log(res.Access-Control-Expose-Headers)
 
@@ -146,7 +146,7 @@ const adminGetSingleWithdrawal = async (req, res) => {
         }).populate({ path: "owner", model: "user" });
         if (!singleWithdrawal) {
             throw new NotFound(
-                `no transaction with id ${withdrawalId} for ${req.decoded.name}`
+                `no deposit with id ${withdrawalId} for ${req.decoded.name}`
             );
         }
         res.status(StatusCodes.OK).json(singleWithdrawal);
@@ -172,7 +172,7 @@ const adminEditSingleWithdrawal = async (req, res) => {
 
         if (!singleWithdrawal) {
             throw new NotFound(
-                `no transaction with id ${withdrawalId} for ${req.decoded.name}`
+                `no deposit with id ${withdrawalId} for ${req.decoded.name}`
             );
         }
         if (singleWithdrawal.edited == true) {
@@ -181,12 +181,12 @@ const adminEditSingleWithdrawal = async (req, res) => {
         if (req.body.status == 'approved') {
             const owner = await User.findOne({ _id: singleWithdrawal.owner })
             await User.findOneAndUpdate({ _id: singleWithdrawal.owner }, { tradeProfit: owner.tradeProfit - req.body.amount, totalEquity: owner.totalEquity - req.body.amount })
-            const finalTransactionEdit = await Withdrawal.findOneAndUpdate({ id: withdrawalId }, { status: "approved", edited: true, })
-            res.status(StatusCodes.OK).json(finalTransactionEdit);
+            const finaldepositEdit = await Withdrawal.findOneAndUpdate({ id: withdrawalId }, { status: "approved", edited: true, })
+            res.status(StatusCodes.OK).json(finaldepositEdit);
         }
         if (req.body.status == 'failed') {
-            const finalTransactionEdit = await Withdrawal.findOneAndUpdate({ id: withdrawalId }, { status: "failed", edited: true })
-            res.status(StatusCodes.OK).json(finalTransactionEdit);
+            const finaldepositEdit = await Withdrawal.findOneAndUpdate({ id: withdrawalId }, { status: "failed", edited: true })
+            res.status(StatusCodes.OK).json(finaldepositEdit);
         }
     } catch (error) {
         console.log(error.message)
@@ -204,7 +204,7 @@ const adminDeleteSingleWithdrawal = async (req, res) => {
         // });
         // if (!singleWithdrawal) {
         //   throw new NotFound(
-        //     `no transaction with id ${withdrawalId} for ${req.decoded.name}`
+        //     `no deposit with id ${withdrawalId} for ${req.decoded.name}`
         //   );
         // }
         res.status(StatusCodes.OK).json({ message: "You cannot Delete Records" });

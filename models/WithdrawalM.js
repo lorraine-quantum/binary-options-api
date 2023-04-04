@@ -5,11 +5,11 @@ const WithdrawalSchema = new mongoose.Schema(
     {
         date: {
             type: String,
-            required: [true, "please provide transaction date"],
+            required: [true, "please provide deposit date"],
         },
         id: {
             type: String,
-            required: [true, "transaction id cannot be empty"]
+            required: [true, "deposit id cannot be empty"]
         },
         reference: {
             type: String,

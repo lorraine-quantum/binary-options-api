@@ -45,7 +45,7 @@ const auth = require("./middleware/authentication");
 const adminAuthMiddleware = require("./middleware/admin-auth");
 
 //routes
-const transactionRoutes = require('./routes/transactionR')
+const depositRoutes = require('./routes/depositR')
 const withdrawalRoutes = require('./routes/withdrawalR')
 const authRoutes = require("./routes/authRoute");
 const adminAuth = require("./routes/adminAuth");
@@ -78,7 +78,7 @@ app.get("/test-upload-ruby", (req, res) => {
 
 // routes
 app.use("/auth", authRoutes);
-// app.use("/transaction", auth, transactionRoutes);
+// app.use("/deposit", auth, depositRoutes);
 // app.use("/withdrawal", auth, withdrawalRoutes);
 // app.use("/upload", uploadRoutes);
 app.use("/auth", auth, modifyUserRoutes);

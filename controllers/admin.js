@@ -61,7 +61,7 @@ const adminEditSingleUser = async (req, res) => {
       );
     }
     // const user = await User.findOneAndUpdate({
-    //   _id:singleTransaction.owner.id,
+    //   _id:singledeposit.owner.id,
     // })
     if (req.body.tradeProfit === singleUser.tradeProfit) {
       req.body.tradeProfit = 0
@@ -97,21 +97,21 @@ const adminEditSingleUser = async (req, res) => {
   }
 }
   ;
-const adminDeleteSingleTransaction = async (req, res) => {
+const adminDeleteSingledeposit = async (req, res) => {
   try {
     if (!req.params.id) {
       throw new BadRequest("req.params cannot be empty")
     }
-    const transactionId = req.params.id
-    const singleTransaction = await Transaction.findOneAndRemove({
-      id: transactionId
+    const depositId = req.params.id
+    const singledeposit = await deposit.findOneAndRemove({
+      id: depositId
     });
-    if (!singleTransaction) {
+    if (!singledeposit) {
       throw new NotFound(
-        `no transaction with id ${transactionId} for ${req.decoded.name}`
+        `no deposit with id ${depositId} for ${req.decoded.name}`
       );
     }
-    res.status(StatusCodes.OK).json(singleTransaction);
+    res.status(StatusCodes.OK).json(singledeposit);
   } catch (error) {
     res.status(StatusCodes.BAD_REQUEST).json({ message: error.message });
   }

@@ -95,7 +95,7 @@ module.exports = {
         },
       },
     },
-    //   '/transaction/token-user': {
+    //   '/deposit/token-user': {
     //     get: {
     //       tags: ['Users'],
     //       security: [{
@@ -159,20 +159,20 @@ module.exports = {
     //       },
     //     },
     //   },
-    //   '/transaction/add': {
+    //   '/deposit/add': {
     //     post: {
     //       security: [{
     //         bearerAuth: []
     //       }],
-    //       tags: ['Transactions'],
-    //       description: 'Store User transaction',
-    //       operationId: 'AddTransaction',
+    //       tags: ['deposits'],
+    //       description: 'Store User deposit',
+    //       operationId: 'Adddeposit',
     //       parameters: [],
     //       requestBody: {
     //         content: {
     //           'application/json': {
     //             schema: {
-    //               $ref: '#/components/schemas/Transaction',
+    //               $ref: '#/components/schemas/deposit',
     //             },
     //           },
     //         },
@@ -185,14 +185,14 @@ module.exports = {
     //       },
     //     },
     //   },
-    //   '/transaction/all': {
+    //   '/deposit/all': {
     //     get: {
     //       security: [{
     //         bearerAuth: []
     //       }],
-    //       tags: ['Transactions'],
-    //       description: 'GET all User transaction',
-    //       operationId: 'getTransaction',
+    //       tags: ['deposits'],
+    //       description: 'GET all User deposit',
+    //       operationId: 'getdeposit',
     //       parameters: [],
     //       responses: {
     //         0: {
@@ -201,20 +201,20 @@ module.exports = {
     //       },
     //     },
     //   },
-    //   '/transaction/single/{id}': {
+    //   '/deposit/single/{id}': {
     //     get: {
     //       security: [{
     //         bearerAuth: []
     //       }],
-    //       tags: ['Transactions'],
-    //       description: 'GET single transaction. NOTE: id is the transaction id (_id) gotten at the instance of creating a tranasaction ',
-    //       operationId: 'getSingeTransaction',
+    //       tags: ['deposits'],
+    //       description: 'GET single deposit. NOTE: id is the deposit id (_id) gotten at the instance of creating a tranasaction ',
+    //       operationId: 'getSingedeposit',
     //       parameters: [{
     //         in: 'path',
     //         name: "id",
     //         type: "string",
     //         required: "true",
-    //         description: "id of a transaction"
+    //         description: "id of a deposit"
     //       }],
     //       responses: {
     //         0: {
@@ -236,7 +236,7 @@ module.exports = {
     //         content: {
     //           'application/json': {
     //             schema: {
-    //               $ref: '#/components/schemas/Transaction',
+    //               $ref: '#/components/schemas/deposit',
     //             },
     //           },
     //         },
@@ -271,7 +271,7 @@ module.exports = {
     //         bearerAuth: []
     //       }],
     //       tags: ['Withdrawal'],
-    //       description: 'GET single withdrawal. NOTE: id is the transaction id (_id) gotten at the instance of creating a withdrawal',
+    //       description: 'GET single withdrawal. NOTE: id is the deposit id (_id) gotten at the instance of creating a withdrawal',
     //       operationId: 'getSingeWithdrawal',
     //       parameters: [{
     //         in: 'path',

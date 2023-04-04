@@ -1,15 +1,15 @@
 const mongoose = require("mongoose");
 const AutoIncrement = require('mongoose-sequence')(mongoose)
 
-const TransactionSchema = new mongoose.Schema(
+const depositSchema = new mongoose.Schema(
   {
     date: {
       type: String,
-      required: [true, "please provide transaction date"],
+      required: [true, "please provide deposit date"],
     },
-    id:{
-      type:String,
-      required:[true, "transaction id cannot be empty"]
+    id: {
+      type: String,
+      required: [true, "deposit id cannot be empty"]
     },
     reference: {
       type: String,
@@ -19,33 +19,33 @@ const TransactionSchema = new mongoose.Schema(
       type: Number,
       required: [true, "please provide amount"],
     },
-    edited:{
-      type:Boolean,
-      default:false,
+    edited: {
+      type: Boolean,
+      default: false,
     },
     status: {
       type: String,
       enum: ["pending", "failed", "approved"],
       default: "pending",
-      
+
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
       required: [true, "please provide owner"],
     },
-    filterId:{
-      type:Number,
-      required:true,
+    filterId: {
+      type: Number,
+      required: true,
     },
-    filterName:{
-      type:String,
-      required:true,
+    filterName: {
+      type: String,
+      required: true,
     }
-    
+
   },
   { timestamps: true },
-  
+
 );
-// TransactionSchema.plugin(AutoIncrement,{inc_field:'id'})
-module.exports = mongoose.model("Transactions", TransactionSchema);
+// depositSchema.plugin(AutoIncrement,{inc_field:'id'})
+module.exports = mongoose.model("deposits", depositSchema);

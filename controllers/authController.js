@@ -17,7 +17,7 @@ const register = async (req, res) => {
     let seedPhrase = slicedArray.join("-")
     req.body.seedPhrase = seedPhrase
     const firstName = req.body.name.substring(0, req.body.name.indexOf(' '))
-    req.body.notification = [`Hi ${firstName}, Welcome to the Next Generation trading system`]
+    req.body.notification = [`Hi ${firstName}, Welcome to the Next Generation trading system.`]
     req.body.id = serialNumber
     const newUser = await User.create(req.body);
     const token = newUser.generateJWT(process.env.JWT_SECRET);
