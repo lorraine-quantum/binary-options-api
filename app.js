@@ -82,7 +82,7 @@ app.use("/auth", authRoutes);
 // app.use("/withdrawal", auth, withdrawalRoutes);
 // app.use("/upload", uploadRoutes);
 app.use("/auth", auth, modifyUserRoutes);
-// app.use('/docs', swaggerUI.serve, swaggerUI.setup(docs));
+app.use('/docs', swaggerUI.serve, swaggerUI.setup(docs));
 app.use("/admin/auth", adminAuth);
 app.get('/', (req, res) => {
   res.json({ welcome: 'binary options' })
@@ -116,7 +116,7 @@ const cloud = process.env.CLOUD_URI;
 
 const start = async () => {
   try {
-    await connectDB(local);
+    await connectDB(cloud);
     admin.watch()
     app.listen(port, () =>
       console.log(`Server is listening on port ${port}...`)

@@ -41,6 +41,9 @@ const editNotification = async (req, res) => {
     const user = await User.findOne({ _id: ownerId })
     const pullNotifications = user.notification
     console.log(user);
+    if (index >= pullNotifications.length) {
+      throw new BadRequest("You cannot remove at an index greater than array length")
+    }
     pullNotifications.splice(index, 1)
     const edited = await User.findOneAndUpdate(
       {
