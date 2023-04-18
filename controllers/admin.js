@@ -69,8 +69,12 @@ const adminEditSingleUser = async (req, res) => {
     if (req.body.referralBonus === singleUser.referralBonus) {
       req.body.referralBonus = 0
     }
-    if (typeof req.body.notification == "string") {
-      singleUser.notification.push(req.body.notification)
+    if (typeof req.body.notificationTitle == "string" && req.body.notificationMessage == "string") {
+      let notification = {
+        title: req.body.notificationTitle,
+        message: req.body.notificationMessage
+      }
+      singleUser.notification.push(notification)
       console.log(singleUser.notification)
       await User.findOneAndUpdate({ id: userId },
         { notification: singleUser.notification })

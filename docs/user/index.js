@@ -70,24 +70,18 @@ module.exports = {
         },
       },
     },
-    '/auth/push-notification': {
-      patch: {
-        tags: ['Users'],
+
+    '/auth/delete-notification/{id}': {
+      delete: {
+        tags: ['deleteNotification'],
         security: [{
           bearerAuth: []
         }],
-        description: 'Update notifications',
+        description: 'Delete notifications',
         operationId: 'updateNotifications',
-        parameters: [],
-        requestBody: {
-          content: {
-            'application/json': {
-              schema: {
-                $ref: '#/components/schemas/UpdateNotifications',
-              },
-            },
-          },
-        },
+        parameters: [{
+          in: "path", name: 'id', type: 'string', required: true, description: "The _id of the notification"
+        }],
         responses: {
           0: {
             description: '*',
@@ -95,6 +89,56 @@ module.exports = {
         },
       },
     },
+    '/auth/read-notification/{id}': {
+      patch: {
+        tags: ['notificationState'],
+        security: [{
+          bearerAuth: []
+        }],
+        description: 'Update notifications',
+        operationId: 'updateNotifications',
+        parameters: [{ in: "path", name: 'id', type: 'string', required: true, description: "The _id of the notification" }],
+        responses: {
+          0: {
+            description: '*',
+          },
+        },
+      },
+    },
+    '/auth/all-notifications/': {
+      get: {
+        tags: ['getNotification'],
+        security: [{
+          bearerAuth: []
+        }],
+        parameters: [],
+        description: 'Get All notifications',
+        operationId: 'fetchNotifications',
+        responses: {
+          0: {
+            description: '*',
+          },
+        },
+      },
+    },
+    '/auth/get-notification/{id}': {
+      get: {
+        tags: ['getNotification'],
+        security: [{
+          bearerAuth: []
+        }],
+        parameters: [{ in: "path", name: 'id', type: 'string', required: true, description: "The _id of the notification" }],
+        description: 'Get All notifications',
+        operationId: 'fetchNotifications',
+        responses: {
+          0: {
+            description: '*',
+          },
+        },
+      },
+    },
+
+
     //   '/deposit/token-user': {
     //     get: {
     //       tags: ['Users'],

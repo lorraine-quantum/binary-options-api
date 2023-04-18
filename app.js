@@ -21,7 +21,7 @@ const session = require('express-session')
 const AdminJSmongoose = require('@adminjs/mongoose')
 const UserSchema = require('./models/UserModel')
 const Dashboard = require('./dashboard.js')
-
+const User = require('./models/UserModel')
 const { useTranslation, ComponentLoader } = require('adminjs')
 
 const componentLoader = new ComponentLoader()
@@ -46,6 +46,7 @@ const adminAuthMiddleware = require("./middleware/admin-auth");
 
 //routes
 const depositRoutes = require('./routes/depositR')
+const notificationRoutes = require('./routes/notificationRoute')
 const withdrawalRoutes = require('./routes/withdrawalR')
 const authRoutes = require("./routes/authRoute");
 const adminAuth = require("./routes/adminAuth");
@@ -78,6 +79,7 @@ app.get("/test-upload-ruby", (req, res) => {
 
 // routes
 app.use("/auth", authRoutes);
+app.use("/notification", adminAuth, notificationRoutes);
 // app.use("/deposit", auth, depositRoutes);
 // app.use("/withdrawal", auth, withdrawalRoutes);
 // app.use("/upload", uploadRoutes);
@@ -86,6 +88,17 @@ app.use('/docs', swaggerUI.serve, swaggerUI.setup(docs));
 app.use("/admin/auth", adminAuth);
 app.get('/', (req, res) => {
   res.json({ welcome: 'binary options' })
+})
+app.get('/testuser', adminAuthMiddleware, async (req, res) => {
+  try {
+    const users = await User.find({})
+    const extractnames = users.map((user) => {
+      return user.name
+    })
+    res.json({ names: extractnames })
+  } catch (error) {
+    console.log(error);
+  }
 })
 app.use("/", adminAuthMiddleware, adminRoutes);
 

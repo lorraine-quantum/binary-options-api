@@ -10,9 +10,9 @@ const auth = async (req, res, next) => {
     if (req.url.includes("secret")) {
       return next()
     }
+
     let { authorization } = req.headers;
     if (!authorization) {
-
       throw new Unauthenticated("supply token and Bearer");
     }
     console.log('admin auth start')
@@ -20,6 +20,7 @@ const auth = async (req, res, next) => {
     res.set('X-Total-Count', 10)
     res.set('Content-Range', 10)
     authorization = authorization.replace(/(^"|"$)/g, '')
+    console.log(authorization);
     const payload = jwt.verify(authorization, process.env.JWT_SECRET);
     req.decoded = { name: payload.name, id: payload.id };
     console.log('auth end, next')

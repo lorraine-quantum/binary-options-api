@@ -46,9 +46,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: "0"
   },
+  // notification: {
+  //   type: [String],
+  // },
   notification: {
-    type: [String],
-    // default: 'Welcome to the Next Generation trading platform'
+    type: [Object]
   },
   email: {
     type: String,
