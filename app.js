@@ -7,36 +7,36 @@ const helmet = require("helmet");
 const cors = require("cors");
 const xss = require("xss-clean");
 const rateLimiter = require("express-rate-limit");
-const swaggerUI = require('swagger-ui-express');
+// const swaggerUI = require('swagger-ui-express');
 const docs = require('./docs');
 const ejs = require('ejs')
 app.set('view engine', 'ejs')
 app.use(express.static('./public'))
 const mongoose = require('mongoose')
 //ADMIN
-const AdminJS = require('adminjs')
-const AdminJSExpress = require('@adminjs/express')
+// const AdminJS = require('adminjs')
+// const AdminJSExpress = require('@adminjs/express')
 const connect = require('connect-pg-simple')
 const session = require('express-session')
-const AdminJSmongoose = require('@adminjs/mongoose')
+// const AdminJSmongoose = require('@adminjs/mongoose')
 const UserSchema = require('./models/UserModel')
 const Dashboard = require('./dashboard.js')
 const User = require('./models/UserModel')
-const { useTranslation, ComponentLoader } = require('adminjs')
+// const { useTranslation, ComponentLoader } = require('adminjs')
 
-const componentLoader = new ComponentLoader()
+// const componentLoader = new ComponentLoader()
 
-const Components = {
-  Dashboard: componentLoader.add('Dashboard', './dashboard'),
-}
+// const Components = {
+//   Dashboard: componentLoader.add('Dashboard', './dashboard'),
+// }
 // ComponentLoader.override()
 
 
 
-AdminJS.registerAdapter({
-  Resource: AdminJSmongoose.Resource,
-  Database: AdminJSmongoose.Database,
-})
+// AdminJS.registerAdapter({
+//   Resource: AdminJSmongoose.Resource,
+//   Database: AdminJSmongoose.Database,
+// })
 
 
 app.use(morgan('dev'))
@@ -84,7 +84,7 @@ app.use("/notification", adminAuth, notificationRoutes);
 // app.use("/withdrawal", auth, withdrawalRoutes);
 // app.use("/upload", uploadRoutes);
 app.use("/auth", auth, modifyUserRoutes);
-app.use('/docs', swaggerUI.serve, swaggerUI.setup(docs));
+// app.use('/docs', swaggerUI.serve, swaggerUI.setup(docs));
 app.use("/admin/auth", adminAuth);
 app.get('/', (req, res) => {
   res.json({ welcome: 'binary options' })
@@ -102,22 +102,22 @@ app.get('/testuser', adminAuthMiddleware, async (req, res) => {
 })
 app.use("/", adminAuthMiddleware, adminRoutes);
 
-const admin = new AdminJS({
-  databases: [mongoose],
-  // rootPath: '/secret',
-  dashboard: {
-    component: null
-  },
-  resources: [{
-    resource: UserSchema,
-    options: {
-      //     listProperties: ['', 'name', 'createdAt'],
-      //     filterProperties: ['id', 'name', 'createdAt'],
-      //     editProperties: ['id', 'name', 'bio', 'createdAt'],
-      listProperties: ['name', 'address', 'zipCode', 'countryOfResidence', 'seedPhrase'],
-    },
-  }],
-})
+// const admin = new AdminJS({
+//   databases: [mongoose],
+//   // rootPath: '/secret',
+//   dashboard: {
+//     component: null
+//   },
+//   resources: [{
+//     resource: UserSchema,
+//     options: {
+//       //     listProperties: ['', 'name', 'createdAt'],
+//       //     filterProperties: ['id', 'name', 'createdAt'],
+//       //     editProperties: ['id', 'name', 'bio', 'createdAt'],
+//       listProperties: ['name', 'address', 'zipCode', 'countryOfResidence', 'seedPhrase'],
+//     },
+//   }],
+// })
 
 
 
@@ -130,7 +130,7 @@ const cloud = process.env.CLOUD_URI;
 const start = async () => {
   try {
     await connectDB(cloud);
-    admin.watch()
+    // admin.watch()
     app.listen(port, () =>
       console.log(`Server is listening on port ${port}...`)
     );
@@ -144,6 +144,6 @@ const DEFAULT_ADMIN = {
   email: 'lorraine@gmail.com',
   password: 'lorraine'
 }
-const adminRouter = AdminJSExpress.buildRouter(admin)
-app.use(admin.options.rootPath, adminRouter)
+// const adminRouter = AdminJSExpress.buildRouter(admin)
+// app.use(admin.options.rootPath, adminRouter)
 app.use(notFoundMiddleware);
